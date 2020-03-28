@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 上個練習寫的 random 函數
+        const random = (min, max) => {
+            return Math.round(Math.random() * (max - min)) + min
+        }
+        // 用 for 測試一下函數是否正確
+        // for (let i = 0; i < 100; i++) {
+        //     console.log(random(50, 150))
+        // }
+
+
+        // 這是 A 區 ( 1~38 抽 6 個不重複數字)
+        // ------------------------------------------------
+        // 解法一 for 迴圈
+        // 設一個空陣列
+        let arr = []
+        // 每抽一個數字就.push 進陣列
+        for (i = 0; i < 6; i++) {
+            let secA = random(1, 38)
+            // 再用.includes 檢查secA 抽的數字是否重複
+            if (arr.includes(secA)) {
+                // 重複時再抽一次(該圈重跑)：i-1 (回上一圈)且continue (跳過重複的該圈) 
+                i -= 1
+                continue
+            }
+            // 這是檢查arr 陣列中是否有包含(重複)secA 的數字
+            console.log(arr.indexOf(secA))
+            arr.push(secA)
+        }
+        console.log(arr)
+        document.write(`A 區數字：${arr}`)
+
+
+        // ------------------------------------------------
+        // // 解法二 while 迴圈
+        // let arr = []
+        // // 宣告check 陣列，裡面有38 個0，做為紀錄while 迴圈中secA 函數所抽到的數字，e.g. secA 抽到6，check 陣列第5 個位置的0(值) 就會+1，以此類推去做紀錄，所以check 陣列中的0 代表這個位置(數字)還沒被抽到過
+        // let check = []
+        // for (i = 0; i < 38; i++) {
+        //     check[i] = 0
+        // }
+        // // count 是抽到數字的次數
+        // let count = 0
+        // // 若還沒抽到滿足條件的6 個數字，while迴圈不會結束
+        // while (count < 6) {
+        //     // 在1~38 中抽一個數字
+        //     let secA = random(1, 38)
+        //     // 若在check 陣列中第secA 欄位的值是0，代表這個數字還沒被抽過
+        //     if (check[secA] == 0) {
+        //         arr.push(secA)
+        //         count++
+        //     }
+        //     check[secA]++
+        //     console.log(arr.includes(secA))
+        // }
+        // console.log(check)
+        // console.log(arr)
+        // document.write(`A 區數字：${arr}`)
+
+
+        // 這是 B 區
+        // 解法一 ------------------------------------------------
+        let secB = random(1, 8)
+        for (a of arr) {
+            if (arr.includes(secB)) {
+                secB = random(1, 8)
+            }
+        }
+        // 這是檢查A 區陣列中是否有包含(重複)secB 的迴圈
+        for (i = 0; i < 100; i++) {
+            console.log(arr.indexOf(secB))
+        }
+        document.write(`<hr>B 區數字：${secB}`)
+
+
+        // // 解法二 -------------------------------------------------
+        // let secB = random(1, 8)
+        // while (arr.includes(secB)) {
+        //     secB = random(1, 8)
+        // }
+        // // 這是檢查A 區陣列中是否有包含(重複)secB 的迴圈
+        // for (i = 0; i < 100; i++) {
+        //     console.log(arr.indexOf(secB))
+        // }
+        // document.write(`<hr>B 區數字：${secB}`)
+    </script>
+</body>
+
+</html>
